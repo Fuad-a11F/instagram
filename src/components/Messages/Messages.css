@@ -1,0 +1,233 @@
+.dialoge  {
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: white;
+    margin-top: 13px;
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    grid-template-rows: 50px 1fr;
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+.name__body, .chats, .main__messages {
+    border: 1px solid lightgray
+}
+.name  {
+    padding-left: 60px;
+    position: relative;
+    font-weight: 600;
+}
+
+.name__body {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.main__messages {
+    grid-column: 2/3;
+    grid-row: 1/3;
+}
+
+.chats {
+    overflow-x: hidden;
+}
+
+.chat {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+}
+.chat:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+.chat_last_message {
+    grid-column: 2/3;
+    position: relative;
+    top: -16px;
+    font-size: 15px;
+    left: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.chat_name  {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    position: relative;
+    top: 7px;
+    left: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.chat_img {
+    border-radius: 50%;
+    position: relative;
+    top: 7px;
+    left: 10px;
+    object-fit: cover;
+}
+
+.main__messages {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal_mes {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_mes__wrapper  {
+    min-width: 200px;
+    min-height: 150px;
+    background-color: white;
+    border-radius: 10px;
+    animation: size 300ms ease forwards;
+}
+
+@keyframes size {
+    0% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal_mes__messages {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    align-items: center;
+}
+
+.modal_mes__content  {
+    width: 400px;
+    height: 470px;
+}
+.input_long {
+    flex: 0 1 82%;
+    outline: none;
+    border: none;
+    height: 35px;
+}
+
+.new_message, .address, .recomended {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.recomended {
+    font-size: 14px;
+}
+
+.address  {
+    position: relative;
+    top:  -2px
+}
+
+.next {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: blue;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+}
+
+
+.close{
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.modal__content  hr {
+    border: 1px solid lightgray;
+}
+
+.modal_mes__content  p {
+    margin: 6px 0;
+}
+
+.info_name-body img{
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    left: 45px
+}
+
+.info_name-body {
+    display: flex;
+}
+
+.dialoge__row {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialoge__messages {
+    flex: 1 0 calc(100vh - 185px);
+    overflow: auto;
+    padding: 0 20px;
+}
+
+.send__messages {
+    width: 100%;
+    min-height: 31px;
+}
+
+.send__messages input {
+    width: calc(100% - 16px);
+    height: 100%;
+    margin-top: 8px;
+    margin-left: 5px;
+    border-radius: 15px;
+    border: 1px solid rgb(201, 200, 200);
+    outline: none;
+}
+
+.message__me {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.message__body p {
+    display: inline-block;
+    margin:  7px 0;
+    padding: 7px;
+    border-radius: 10px;
+    color: white;
+    max-width: 300px;
+
+}
+
+
+.message__someone p {
+    background-color: gray
+}
+
+.message__me p {
+    background-color: purple
+}

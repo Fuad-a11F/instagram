@@ -1,0 +1,8 @@
+.result__loading {
+    display: flex;
+    justify-content: center;
+}
+
+.nav_modal {
+    display: flex;
+}

@@ -1,0 +1,216 @@
+.setting__nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.settings__grid {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    justify-items: center;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setting__nav {
+    background-color: white;
+    height: auto;
+    border: 1px solid lightgray;
+}
+
+.link-item {
+    cursor: pointer;
+    width: 280px;
+    min-height: auto;
+    padding: 13px 0;
+}
+
+.setting_nav {
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    text-align: left;   
+    padding: 0  20px;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: black
+}
+
+.link-item:hover {
+    background-color: rgb(235, 235, 235);
+    border-left: 2px solid gray;
+}
+
+._active_set {
+    border-left: 2px solid black;
+}
+
+.settingMain, .settingChange {
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 25px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.settingMain__top img, .settingChange__top img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: relative;
+    top: 3px;
+    object-fit: cover;
+}
+
+.settingMain__top p,  .settingChange__top p {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+.settingChange__top p {
+    position: relative;
+    top: 6px;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.settingMain__top{
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    position: relative;
+    left: -58px
+}
+
+.settingChange__top  {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    position: relative;
+    left: -43px;
+    margin-bottom: 30px;
+}
+
+
+.settingMain__top button {
+    grid-column: 2/3;
+    border: 1px solid;
+    border:  none;
+    outline: none;
+    color: blue;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 13px;
+    position: relative;
+    top: -16px;
+    margin-bottom: -10px;
+    cursor: pointer;
+    left: -7px;
+    text-align: left;
+}
+.form__input-row {
+    display: grid;
+    grid-template-columns: 85px  1fr;
+    justify-items: end;
+    margin-top: 25px;
+    position: relative;
+    left: -20px
+}
+.form__send-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.form__input-row:first-child {
+    margin-top: 10px;
+}
+.form__input-row input{
+    margin-left: 20px;
+    height: 26px;
+    width: 300px;
+}
+
+.form__input-row textarea{
+    margin-left: 5px;
+    height: 55px;
+    width: 302px;
+    resize: vertical;
+}
+
+.form__input-row span{
+    position: relative;
+    left:  -23px;
+    text-align: right;
+    font-weight: 600;
+    width: 140px;
+}
+
+.settingMain__form p {
+    font-size: 12px;
+    color: gray;
+    position: relative;
+    left: 85px;
+    width: 300px;
+}
+
+.form__input-title  {
+    margin-top: 30px;
+    font-weight: 700;
+
+}
+
+.button_set {
+    border: none;
+    outline: none;
+    background-color: rgb(15, 125, 209);
+    color: white;
+    padding: 7px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.center_set {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.button_set_del {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: rgb(15, 125, 209);
+    cursor: pointer;
+}
+
+.change_pas  {
+    position: relative;
+    left:  84px;
+    margin-top: 30px;
+}
+
+.forget_pas  {
+    position: relative;
+    top: 50px;
+    left: -32px;
+    margin-bottom: 70px;
+}
+
+.main_btn  {
+    margin-left: 38px;
+    position: relative;
+    left: 15px
+}
+
+.settingMain__top input {
+    visibility: hidden;
+}
