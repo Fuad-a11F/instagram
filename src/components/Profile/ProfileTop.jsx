@@ -7,13 +7,13 @@ import ProfileTopInfo from './ProfileTopInfo'
 import MyLoader from './ProfileTopLoader'
 import MyLoader2 from './profileTopLoader_2'
 
-function ProfileTop({id, check_id_and_jwd_id}) {
-    let {error, loading, data, refetch} = useQuery(GET_USER_TOP, {variables: {id: id}})
+function ProfileTop({id, check_id_and_jwd_id, data, refetch}) {
+    let user_top = useQuery(GET_USER_TOP, {variables: {id: id}})
     let [userTopData, setUserTopData] = React.useState()
 
     React.useEffect(() => {
-        if (data) setUserTopData(data.getUserTop);
-    }, [data])
+        if (user_top.data) setUserTopData(user_top.data.getUserTop);
+    }, [user_top])
 
     return (
         <>            
@@ -22,7 +22,7 @@ function ProfileTop({id, check_id_and_jwd_id}) {
                 <div >   
                     <img className='profileTop__ava' src={userTopData.image_url ? userTopData.image_url : none_image} alt="" />
                 </div>
-                <ProfileTopInfo id={id} refetch={refetch} check_id_and_jwd_id={check_id_and_jwd_id} userTopData={userTopData}/>
+                <ProfileTopInfo refetch_block={refetch} data={data} id={id} refetch={user_top.refetch} check_id_and_jwd_id={check_id_and_jwd_id} userTopData={userTopData}/>
             </div>
             :
             <div className='profileTop'>

@@ -9,20 +9,18 @@ import SettingChange from './SettingChange'
 import SettingSave from './SettingSave'
 
 function Settings() {
-    let [menu, setMenu] = React.useState('main')
-
+    let location = window.location.pathname
     return (
         <div className="container">
             <div className='settings__grid'>
-                <SettingsSiteBar menu={menu} setMenu={setMenu}/>
-                {menu ==='main' && <SettingMain />}
-                {menu ==='change' && <SettingChange />}
-                {menu ==='save' && <SettingSave />}
+                <SettingsSiteBar />
+                {location.includes('main') && <SettingMain />}
+                {location.includes('change') && <SettingChange />}
+                {location.includes('save') && <SettingSave />}
                 
             </div>
             <SideBar__footer sideBar={true}/>
         </div>
-
     )
 }
 

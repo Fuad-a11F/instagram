@@ -27,7 +27,6 @@
     cursor: pointer;
     width: 280px;
     min-height: auto;
-    padding: 13px 0;
 }
 
 .setting_nav {
@@ -35,12 +34,14 @@
     border: none;
     outline: none;
     background-color: transparent;
-    text-align: left;   
-    padding: 0  20px;
     cursor: pointer;
     display: block;
     text-decoration: none;
-    color: black
+    color: black;
+    display: flex;
+    align-items: center; 
+    height: 50px;
+    padding-left: 30px;
 }
 
 .link-item:hover {
@@ -52,7 +53,7 @@
     border-left: 2px solid black;
 }
 
-.settingMain, .settingChange {
+.settingMain, .settingChange, .settingSave {
     background-color: white;
     border: 1px solid lightgray;
     padding: 25px 50px;
@@ -213,4 +214,18 @@
 
 .settingMain__top input {
     visibility: hidden;
+}
+
+.setting__image-wrapper {
+    position: relative;
+}
+
+.image_loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: rgba(242, 242, 242, 0.6);
 }

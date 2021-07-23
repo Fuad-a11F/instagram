@@ -2,8 +2,8 @@ import React from 'react'
 
 function SettingSave() {
     return (
-        <div>
-            21313
+        <div className='settingSave'>
+            <h2>Страница пуста</h2>
         </div>
     )
 }

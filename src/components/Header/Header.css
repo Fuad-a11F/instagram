@@ -79,6 +79,7 @@ header {
     position: relative;
 }
 
+
 .icon  {
     position: absolute;
     top: 7px;
@@ -151,14 +152,36 @@ header {
 .item {
     margin-left: 25px;
     cursor: pointer;
+    position: relative;
+}
+.new_action {
+    position: absolute;
+    bottom: 2px;
+    right: -1px;
+    height: 6px;
+    width: 6px;
+    background-color: red;
+    border-radius: 50%;
 }
 .item:first-child {
     margin-left: 0;
 }
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    top: 2px
+}
+
+.active_nav {
+    border: 1px solid;
+    padding: 1px;
+    box-sizing: border-box;
+}
 
 .modal__action p{
     font-size: 14px;
-    text-align: center;
+
 }
 
 .modal__button {
@@ -263,4 +286,15 @@ header {
 
 .search__grid:hover {
     background-color: rgb(235, 235, 235);
+}
+
+.new__message {
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: 14px;
+    right: 0;
+    z-index: 10000;
 }

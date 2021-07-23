@@ -1,38 +1,38 @@
 import { useMutation, useQuery } from '@apollo/client'
 import React from 'react'
-import { ADD_COMMENT, GET_POST } from '../../../GraphQl/Queries'
+import { DELETE_POST, GET_POST } from '../../../GraphQl/Queries'
 import './detailsInfoPost.css'
+import CommentBar from './CommentBar'
 import none_photo from '../../../none.jpg'
-import heart_icon from '../../Header/images/heart_no.png'
-import comment_icon from '../../Header/images/dialoge_no.png'
-import zakladka_icon from '../../Main/images/zakladka.png'
+import setting_icon from './images/setting.png'
+import { CircularProgress } from '@material-ui/core'
 
-
-function DetailInfoPost({postId, modal, setModal}) {
-    let {error, loading, data, refetch} = useQuery(GET_POST, {variables: {token: localStorage.getItem('token'), id: postId}})
-    let [info, setInfo] = React.useState()
-    let [addComment] = useMutation(ADD_COMMENT)
-    let [comment, setComment] = React.useState('')
+function DetailInfoPost({postId, modal, setModal, id, refetch}) {
+    let {error, loading, data} = useQuery(GET_POST, {variables: {token: localStorage.getItem('token'), id: postId, user_id: id}})
+    let [deletePost] = useMutation(DELETE_POST)
+    let [info, setInfo] = React.useState([])
+    let [modalDel, setModalDel] = React.useState(false)
 
     React.useEffect(() => {
-        if (data) setInfo(data.getPost);
-        console.log(data);
-    }, [data])
+        if (data) {
+            setInfo(data.getPost)
+        }
+      }, [data])
 
     React.useEffect(() => {
         refetch()
     }, [])
 
-    function add_comment(e) {
-        e.preventDefault();
-        addComment({variables: {token: localStorage.getItem('token'), time: Date.now().toString(), text: comment, post_id: postId }})
-        setComment('')
+    async function delete_post(id) {
+        await deletePost({variables: {id}})
+        refetch()
     }
    
     return (
-        <div>
-            {info && (
-                <div className={modal ? 'modal_info' : 'modal_info none'}>
+        <div className={modal ? 'detail__info' : 'detail__info none'}>
+            {!loading ? (     
+                info.length != 0 && (
+                <div>
                     <div className="modal_info-content">
                         <div className='post__grid'>
                             <div className="post-main__data">
@@ -44,45 +44,31 @@ function DetailInfoPost({postId, modal, setModal}) {
                                         <img src={info.user_main.image_url ? info.user_main.image_url : none_photo} width='45' height='45' alt="" />
                                         <div>
                                             <p>{info.user_main.name}</p>
-                                            <p className='grid-position'>sdf</p>
+                                            <p className='grid-position'>{info.user_main.nickname}</p>
                                         </div>
                                     </div>
-                                    <div>
-                                        kjh
+                                    <div className='post__info-setting'>
+                                        <img onClick={() => setModalDel(!modalDel)} src={setting_icon} width='20' height='20' alt="" />
+                                        {modalDel && <div className='setting__wrapper'>
+                                            <button onClick={() => delete_post(info.id)}>Удалить</button>
+                                        </div>}
                                     </div>
                                 </div>
                                 <hr />
-                                <div className="post_info-comment">
-                                    {info.comments.map(item => {
-                                        return <p>{item.text}</p>
-                                    })}
-                                </div>
-                                <hr />
-                                <div>   
-                                    <div className='post_info-action'>
-                                        <div>
-                                            <img src={heart_icon} width='28' height='28' alt="" />
-                                            <img src={comment_icon} width='28' height='28' alt="" />
-                                        </div>
-                                        <div>
-                                            <img src={zakladka_icon} width='28' height='28' alt="" />
-                                        </div>
-                                    </div>
-                                    <form action="#" onSubmit={(e) => add_comment(e)}>
-                                        <input type="text" value={comment} onChange={e => setComment(e.target.value)} placeholder='Добавить комментарий...'/>
-                                        <button>Опубликовать</button>
-                                    </form>
-                                </div>
-                                
+                                <CommentBar postId={postId} id={id} post_id={info.id} info={info} />
                             </div>
                         </div>
-                        <button className='close-btn' onClick={() => setModal(false)} >h</button>
+                        <button className='close-btn' onClick={() => setModal(false)} >X</button>
                     </div>
                 </div>
-            )}
+                )
+            ) :  <div className='modal_info'>
+                    <div className='modal_info-content modal-loading'><CircularProgress color="primary"/></div>
+                </div>}
+            
         </div>
 
     )
 }
 
-export default DetailInfoPost
+export default React.memo(DetailInfoPost)

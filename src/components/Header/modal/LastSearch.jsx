@@ -1,9 +1,9 @@
 import React from 'react'
 import none_image from  '../../../none.jpg'
 import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 function LastSearch({data}) {
-    
     return (
             <>
              <h4>Недавние</h4>
@@ -31,6 +31,10 @@ function LastSearch({data}) {
             </>
   
         )
+}
+
+LastSearch.propTypes = {
+    data: PropTypes.object
 }
 
 export default LastSearch

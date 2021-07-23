@@ -3,33 +3,50 @@ import React from 'react'
 import { ADD_POST } from '../../GraphQl/Queries'
 import upload_image from '../../upload'
 import AddPost from './modal/addPost'
+import 'firebase/storage'
+import firebase from 'firebase/app'
 
 function ProfileAdd({setNav}) {
+    let storage12 = firebase.storage()
     let [modal, setModal] = React.useState(false)
     let [publish, setPublish] = React.useState(false)
     let ref_preview = React.useRef()
-    let [imgPath, setImgPath] = React.useState()
     let [title, setTitle] = React.useState('')
     let [addPost] = useMutation(ADD_POST)
+    let [image, setImage] = React.useState()
 
-    function upload_img(e) {
-        let path_result = upload_image(e, setImgPath)
-        ref_preview.current.innerHTML = `<img src=${path_result} alt='фото'/>`
-        ref_preview.current.style.display = 'block'
+    async function upload_img(e) {
+
+        function callback(ev) {
+            setImage(e.target.files[0])
+            ref_preview.current.innerHTML = `<img src=${ev.target.result} alt='фото'/>`
+            ref_preview.current.style.display = 'block'
+        }
+        upload_image(e, callback)
     }
 
     function publishPost(e) {
         e.preventDefault();
-        setModal(true)
-        addPost({variables: {token: localStorage.getItem('token'), image_path: imgPath, comment_title: title}});
-        sessionStorage.setItem('item', 'Публикации')
-        setNav((prev) => {
-            return prev.map(item => {
-                if (item.title === 'Публикации') return {...item, checked:  true}
-                else return {...item, checked:  false}
+        let ref = storage12.ref(`images/${image.name}`)
+        let task = ref.put(image)
+        task.on('state_changed', snapshot => {
+            console.log(snapshot);
+        }, error => {
+            console.log(error);
+        }, () => {
+            task.snapshot.ref.getDownloadURL().then(async url => {
+                await addPost({variables: {token: localStorage.getItem('token'), image_path: url, comment_title: title}});
+                sessionStorage.setItem('item', 'Публикации')
+                setModal(true)
+                setPublish(true)
+                setNav((prev) => {
+                    return prev.map(item => {
+                        if (item.title === 'Публикации') return {...item, checked:  true}
+                        else return {...item, checked:  false}
+                    })
+                })
             })
         })
-        setPublish(true)
     }
 
     return (
@@ -51,7 +68,7 @@ function ProfileAdd({setNav}) {
                         <span>Добавить подпись:</span>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Добавить подпись'/>
                     </div>
-                    <button  className='publish-btn button'>Опубликовать</button>
+                    <button className='publish-btn button'>Опубликовать</button>
                 </div>
             </form>
         </div>

@@ -6,15 +6,15 @@ import { NavLink } from 'react-router-dom'
 import { useMutation } from "@apollo/client";
 import { ADD_SEARCH } from "../../../GraphQl/Queries";
 import none_image from  '../../../none.jpg'
+import PropTypes from 'prop-types';
 
 function ModalSearch({ result_search, data }) {
     let [addSearch] = useMutation(ADD_SEARCH)
-
     function add_search(id) {
         addSearch({variables: {token: localStorage.getItem('token'), search_id: id}})
         // обновить состояние после добавление search
     }
-
+    console.log(typeof(data));
   return (
     <Modal classes="">
 
@@ -46,6 +46,10 @@ function ModalSearch({ result_search, data }) {
       )}
     </Modal>
   );
+}
+
+ModalSearch.propTypes ={
+  data: PropTypes.object
 }
 
 export default ModalSearch;

@@ -4,20 +4,10 @@
     right: 10px;
 }
 
-.modal_info {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-}
 
+.modal-loading {
+    padding: 10px;
+}
 .modal_info-content {
     max-height: 620px;
     max-width: 920px;
@@ -53,7 +43,7 @@
 
 .post__info-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50px 1fr;
     align-items: center;
     height: 75px;
     
@@ -88,14 +78,108 @@
 }
 
 .post_info-comment {
-    border: 1px solid;
     flex: 1 1 100%;
     width: 90%;
-    overflow: auto;
+    display: flex;
     max-height: 392px;
+    flex-direction: column;
+    overflow: auto;
+   
 }
 
 .post_info-action {
     display: flex;
     justify-content: space-between;
+}
+
+.post_info-comment img {
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.comment__row {
+    display: flex;
+    margin-top: 30px;
+}
+
+.first-comment {
+    margin-top: -18px;
+}
+
+.comment__row p {
+    margin-left: 16px;
+    margin-top: 0;
+}
+
+.comment__row span {
+    font-weight: 600;
+}
+
+.main__comment {
+    background-color: rgb(230, 230, 230);
+}
+
+.comment__info  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    padding: 0 10px;
+}
+
+.comment__info span {
+    font-size: 14px;
+}
+
+.detail__info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+            
+    z-index: 20;
+}
+
+.loader__comment div {
+    margin-top: 20px;
+}
+
+.loader__comment div:first-child {
+    margin-top: 10px;
+}
+
+.post__info-setting {
+    cursor: pointer;
+    position: relative;
+}
+
+.setting__wrapper {
+    position: absolute;
+    top: 27px;
+    right: 5px;
+    box-sizing: border-box;
+    background-color: white;
+    padding: 4px;
+    width: auto;
+    z-index: 2;
+    height: auto;   
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.setting__wrapper button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.setting__wrapper:hover {
+    background-color: rgb(235, 235, 235);
 }

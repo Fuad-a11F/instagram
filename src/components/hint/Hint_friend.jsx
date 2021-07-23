@@ -9,7 +9,7 @@ function Hint_friend() {
                     <p className='hint__title'>Найдите друзей</p>
                     <p className='hint__text'>Вы сами решаете, на кого подписаться. Мы никогда не будем размещать публикации без вашего разрешения.</p>
                 </div>
-                <button className='hint__button'>Найти друзей</button>
+                <button className='hint__button'>Найти друзей (не работает)</button>
             </div>
         </Hint>
     )

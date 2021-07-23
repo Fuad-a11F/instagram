@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 function SettingForm({title, setChange, change}) {
     return (
@@ -9,6 +10,11 @@ function SettingForm({title, setChange, change}) {
             </div>
         </div>
     )
+}
+
+SettingForm.propTypes = {
+    title: PropTypes.string,
+    setChange:  PropTypes.func,
 }
 
 export default SettingForm

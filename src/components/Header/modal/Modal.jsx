@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 function Modal({children, classes}) {
     return (
@@ -8,6 +9,10 @@ function Modal({children, classes}) {
             </div>
         </div>
     )
+}
+
+Modal.propTypes ={
+    classes: PropTypes.string    
 }
 
 export default Modal

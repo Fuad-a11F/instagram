@@ -1,0 +1,55 @@
+.modal-set {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 31;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-set__content  {
+    width: 280px;
+    max-height: 400px;
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+}
+
+.modal-set__content  button {
+    height: 45px;
+    background-color: white;
+    border:none
+}
+
+.modal-set__content  button:hover{
+    background-color: rgb(235, 235, 235);
+    cursor: pointer;
+}
+
+.modal-set__content  button {
+    border-top: 1px  solid rgb(218, 218, 218);
+    width: 100%;
+}
+
+.setting_cancel{
+    color:red;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.setting_send_message {
+    text-align: center;
+}
+
+.little-margin {
+    margin: 8px auto 0 auto;
+    padding: 5px;
+    position: relative;
+    z-index: 10;
+}

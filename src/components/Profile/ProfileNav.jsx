@@ -3,22 +3,14 @@ import { NavLink } from 'react-router-dom'
 import './Profile.css'
 
 
-function ProfileNav({nav, setNav, id, check_id_and_jwd_id}) {
-    function profile_nav_active(item) {
-        setNav((prev) => {
-            return prev.map(obj => {
-                return obj === item ? {...item, checked: true} : {...obj, checked: false}
-            })
-        })
-        sessionStorage.setItem('item', item.title)
-    }
+function ProfileNav({nav, id, check_id_and_jwd_id}) {
 
     return (
         <div className='profileNav'>
             {check_id_and_jwd_id() ? 
             <>
                 {nav.map((item, index) => {
-                    return <div key={item.title} onClick={() => profile_nav_active(item)}><NavLink className={item.checked ? `profileNav__link ${index === 0  && ' first_item '} _active` : `profileNav__link ${index === 0  && ' first_item '}`} to={item.path.replace('id', id)}>{item.title}</NavLink></div>
+                    return <div key={item.title}><NavLink className={item.checked ? `profileNav__link ${index === 0  && ' first_item '} _active` : `profileNav__link ${index === 0  && ' first_item '}`} to={item.path.replace('id', id)}>{item.title}</NavLink></div>
                 })}
             </> :
             <>
@@ -30,4 +22,4 @@ function ProfileNav({nav, setNav, id, check_id_and_jwd_id}) {
     )
 }
 
-export default ProfileNav
+export default React.memo(ProfileNav)

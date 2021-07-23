@@ -17,7 +17,7 @@ function ModalProfile() {
                     <NavLink className='modal__link' to={'/profile/'+parseJwt(localStorage.getItem('token')).id}>Профиль</NavLink>
                 </div>
                 <div className='modal__button'>
-                    <NavLink className='modal__link' to='/profile/saved'>Сохраненное</NavLink>
+                    <NavLink className='modal__link' to={'/profile/'+parseJwt(localStorage.getItem('token')).id+'/saved'}>Сохраненное</NavLink>
                 </div>
                 <div className='modal__button'>
                 <NavLink className='modal__link' to='/setting/main'>Настройки</NavLink>

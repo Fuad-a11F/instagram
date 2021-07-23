@@ -6,6 +6,7 @@ function ProfilePublishedItem({photo, likes, comments, setModal,setPostId, id}) 
         setModal(true)
         setPostId(id)
     }
+
     return (
         <div className="grid__body" onClick={() => openInfo()}>
             <ProfileHover likes={likes} comments={comments}/>
@@ -14,4 +15,4 @@ function ProfilePublishedItem({photo, likes, comments, setModal,setPostId, id}) 
     )
 }
 
-export default ProfilePublishedItem
+export default React.memo(ProfilePublishedItem)

@@ -6,7 +6,7 @@ import PostItemFooter from './PostItemFooter'
 function PostItem() {
     return (
         <div className='postItem'>
-           <PostItemTop /> 
+           <PostItemTop/> 
            <PostItemPhoto /> 
            <PostItemFooter /> 
         </div>

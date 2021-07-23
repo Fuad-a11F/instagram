@@ -1,5 +1,6 @@
-export default function upload_image(e, func) {
+export default function upload_image(e, callback) {
     let  item = e.target.files[0]
+    let result = ''
     if (!['image/jpeg', 'image/png'].includes(item.type)) {
         alert('kek')
         e.target.value = ''
@@ -11,9 +12,10 @@ export default function upload_image(e, func) {
     }
 
     let reader = new FileReader()
-    reader.readAsDataURL(item)
     reader.onload = (ev) => {
-        func(ev.target.result)
-        return ev.target.result
+        callback(ev)
     }
+    reader.readAsDataURL(item)
+    
+    return result
 }

@@ -5,7 +5,7 @@ import none_icon from "../../none.jpg";
 import SettingForm from "./SettingForm";
 
 function SettingChange() {
-  let { error, loading, data, refetch } = useQuery(GET_PASSWORD, {
+  let { data, refetch } = useQuery(GET_PASSWORD, {
     variables: { token: localStorage.getItem("token") },
   });
   let [changePassword] = useMutation(CHANGE_PASSWORD);
@@ -40,7 +40,6 @@ function SettingChange() {
   return (
     <div className="settingChange">
       <div className="settingChange__top ">
-        {console.log(values)}
         <img src={values.image_url ? values.image_url : none_icon} alt="" />
         <p>{values.nickname}</p>
       </div>

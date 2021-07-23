@@ -3,27 +3,31 @@ import React from 'react'
 import { ADD_SUBSCRIBE, GET_SUBSCRIBER, REMOVE_SUBSCRIBE } from '../../GraphQl/Queries'
 import ProfileLengthSubscribers from './ProfileLengthSubscribers'
 import ProfileLengthSubscription from './ProfileLengthSubscription'
+import {NavLink} from 'react-router-dom'
+import setting from './images/setting.png'
+import Setting from './modal/setting'
 
-function ProfileTopInfo({userTopData, check_id_and_jwd_id, id, refetch}) {
+function ProfileTopInfo({userTopData, check_id_and_jwd_id, id, refetch, data, refetch_block}) {
     let [addSubscribe] = useMutation(ADD_SUBSCRIBE)
     let [removeSubscribe] = useMutation(REMOVE_SUBSCRIBE)
     let query = useQuery(GET_SUBSCRIBER, {variables: {token: localStorage.getItem('token'), subscriber_id: id}})
     let [state, setState] = React.useState()
     let hint_ref = React.useRef()
     let hint_ref_2 = React.useRef()
+    let [settingModal, setSettingModal] = React.useState(false)
 
     React.useEffect(() => {
         if (query.data) setState(query.data.getSubscriber);
     }, [query.data])
 
-    function add_subscriber() {
-        addSubscribe({variables: {token: localStorage.getItem('token'), subscriber_id: id}})
+    async function add_subscriber() {
+        await addSubscribe({variables: {token: localStorage.getItem('token'), subscriber_id: id}})
         refetch()
         query.refetch()
     }
 
-    function remove_subscriber() {
-        removeSubscribe({variables: {token: localStorage.getItem('token'), subscriber_id: id}})
+    async function remove_subscriber() {
+        await removeSubscribe({variables: {token: localStorage.getItem('token'), subscriber_id: id}})
         refetch()
         query.refetch()
     }
@@ -48,19 +52,29 @@ function ProfileTopInfo({userTopData, check_id_and_jwd_id, id, refetch}) {
             hint_ref_2.current.classList.remove('open_hint_profile')
         } catch (error) {}    
     }
+
+    function start_anim(e) {
+        e.target.closest('.profileTopInfo__setting').classList.add('anim_start');
+        e.target.closest('.profileTopInfo__setting').classList.remove('anim_end');
+    }
+    function end_anim(e) {
+        e.target.closest('.profileTopInfo__setting').classList.remove('anim_start');
+        e.target.closest('.profileTopInfo__setting').classList.add('anim_end');
+    }
+
     return (
         <div>
             <div className="profileTopInfo__row">
                 <div className='profileTopInfo__name'>{userTopData.name}</div>
                 {check_id_and_jwd_id() ? 
                 <>
-                    <div className='profileTopInfo__update-btn'><button>Редактировать профиль</button></div>
-                    <div className='profileTopInfo__setting'>setting</div>
+                    <div className='profileTopInfo__update-btn'><NavLink to='/setting/main'><button>Редактировать профиль</button></NavLink></div>
+                    <div className='profileTopInfo__setting'><img onClick={()=> setSettingModal(true)} onMouseEnter={(e) => start_anim(e)} onMouseLeave={(e) => end_anim(e)} src={setting} width='40' height='40' alt="" /></div>
                 </> :
                 <>
                     {!state ? <div className='profileTopInfo__update-btn subscribe' onClick={() => add_subscriber()}><button>Подписаться</button></div> : 
                     <div className='profileTopInfo__update-btn subscribe _done' onClick={() => remove_subscriber()}><button>Отписаться</button></div>}
-                    <div className='profileTopInfo__setting'>set</div>
+                    <div className='profileTopInfo__setting' ><img onClick={()=> setSettingModal(true)} onMouseEnter={(e) => start_anim(e)} onMouseLeave={(e) => end_anim(e)} src={setting} width='40' height='40' alt="" /></div>
                 </>
                 }
             </div>
@@ -84,9 +98,10 @@ function ProfileTopInfo({userTopData, check_id_and_jwd_id, id, refetch}) {
                     <ProfileLengthSubscription hint_ref_2={hint_ref_2} id={id}/>
                 </div>                                
             </div>
-            <div className='real-name'>kjhvhhj</div>
+            <div className='real-name'>{userTopData.nickname}</div>
+            {settingModal && <Setting refetch={refetch_block} data={data} myPage={check_id_and_jwd_id(id)}  id={id} setSettingModal={setSettingModal}/>}
         </div>
     )
 }
 
-export default ProfileTopInfo
+export default React.memo(ProfileTopInfo)

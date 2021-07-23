@@ -3,6 +3,8 @@ import React from 'react'
 import { GET_USERS, GET_SEARCH } from '../../GraphQl/Queries'
 import search_icon from './images/loupa.svg'
 import ModalSearch from './modal/ModalSearch'
+import PropTypes from 'prop-types';
+
 
 function Search({setAction, setProfile}) {
     let [search, setSearch] = React.useState(true)
@@ -11,27 +13,25 @@ function Search({setAction, setProfile}) {
     let input_ref = React.useRef()  
     let [getUserSearch, {loading, data}] = useLazyQuery(GET_USERS)
     let [getSearch, params] = useLazyQuery(GET_SEARCH)
-
     React.useEffect(() => {
         if (params.data) setLastSearch(params.data);  
     }, [params.data])
 
     React.useEffect(() => {
         if (data) {
-            if (data.getUsers.length === 0) {
+            if (data.getUsers.length === 0) 
                 setPeopleSearch('Не найдено!')
-            }
             else
                 setPeopleSearch(data.getUsers);
         }
     }, [data])
 
-    function focus(){
+   function focus(){
         setSearch(false)
         setAction(false)
         setProfile(false)
         getSearch({variables: {token: localStorage.getItem('token')}})
-    }
+   }
     function  blur(e){
         if (!e.target.closest('.modal') && !e.target.closest('.input'))  {
             setSearch(true)
@@ -69,4 +69,10 @@ function Search({setAction, setProfile}) {
     )
 }
 
-export default Search
+Search.propTypes ={
+    setProfile: PropTypes.func,
+    setAction: PropTypes.func,
+}
+
+
+export default React.memo(Search)
